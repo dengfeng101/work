@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace指的是你的dao接口-->
+<mapper namespace="com.example.mapper.StudentMapper">
+
+    <insert id="add">
+        insert into `student`(student_name,student_age)
+        values (#{student0.studentName},#{student0.studentAge})
+    </insert>
+    <delete id="del">
+        delete from `student`
+        where student_id=#{id}
+    </delete>
+    <update id="update">
+        update `student`
+        set student_name=#{student1.studentName}
+        where student_id=#{student1.studentId}
+    </update>
+    <resultMap id="f" type="com.example.pojo.Student">
+        <id property="studentId" column="student_id"></id>
+        <result property="studentName" column="student_name"></result>
+        <result property="studentAge" column="student_age"></result>
+    </resultMap>
+    <select id="findById" resultMap="f">
+        select student_id,student_name,student_age
+        from `student`
+        where student_id=#{id}
+    </select>
+    <resultMap id="f0" type="com.example.pojo.Student">
+        <id property="studentId" column="student_id"></id>
+        <result property="studentName" column="student_name"></result>
+        <result property="studentAge" column="student_age"></result>
+    </resultMap>
+    <select id="findAll" resultMap="f0">
+        select * from `student`
+    </select>
+</mapper>
